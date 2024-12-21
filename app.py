@@ -8,6 +8,8 @@ book_pivot = pk.load(open('pkl_store/pivot_table.pkl','rb'))
 model = pk.load(open('pkl_store/model.pkl','rb'))
 url_list = pk.load(open('pkl_store/url_list.pkl','rb'))
 
+def fetch_img(title):
+    return url_list[url_list['title'] == title].head(1)['img_urll']
 
 def recommendation_system(input_book_title):
     book_index = np.where(book_pivot['title'] == input_book_title)[0]
