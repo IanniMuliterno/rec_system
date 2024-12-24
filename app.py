@@ -13,20 +13,23 @@ def fetch_img(title):
 
 def recommendation_system(input_book_title):
     book_index = np.where(book_pivot['title'] == input_book_title)[0]
-
+    #print(book_pivot.iloc[964]['title'])
     if len(book_index) == 0:
         print("this book does not exist on our list.")
         return
     
     book_index = book_index[0]
     _, recomm = model.kneighbors(book_pivot.iloc[book_index,1:].values.reshape(1,-1),n_neighbors=6)
+
+    book_output = []
+    book_url = []
+    j = 0
     for i in recomm[0]:
-        if i == 0:
-            print(f'you selected the book: {input_book_title}')
-            print('the recommendations are: ')
-            print('')
-        else: 
-            print(book_pivot.iloc[i]['title'])
+        if i > 0:
+            book_output[j] = book_pivot.iloc[i]['title']
+            book_url[j] = fetch_img(book_output[j])
+            j += 1
+    return book_url, book_output
 
 
 st.header("Book recommendation system")
@@ -34,9 +37,9 @@ book_selected = st.selectbox('Select a book',books)
 
 if st.button('Recommend 5 books'):
 
-    _, recomm = recommendation_system(book_selected)
+    url_recomm, recomm = recommendation_system(book_selected)
     c1, c2, c3, c4, c5 = st.columns(5)
     
     with c1:
-        st.text()
-        st.image()
+        st.text(recomm[0])
+        st.image(url_recomm[0])
