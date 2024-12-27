@@ -26,8 +26,8 @@ def recommendation_system(input_book_title):
     j = 0
     for i in recomm[0]:
         if i > 0:
-            book_output[j] = book_pivot.iloc[i]['title']
-            book_url[j] = fetch_img(book_output[j])
+            book_output.append(book_pivot.iloc[i]['title'])
+            book_url.append(fetch_img(book_output[j]))
             j += 1
     return book_url, book_output
 
