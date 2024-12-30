@@ -2,7 +2,7 @@ from setuptools import setup
   
 
 SRC_REPO = "src"
-LIST_OF_REQUIREMENTS = ['streamlit', 'numpy']
+LIST_OF_REQUIREMENTS = ['streamlit', 'numpy','sklearn']
 
 setup( 
     name='Book Recommendation', 
