@@ -1,6 +1,7 @@
 import pickle as pk
 import streamlit as st
 import numpy as np
+import sklearn
 
 
 books = pk.load(open('pkl_store/book_names.pkl','rb'))
